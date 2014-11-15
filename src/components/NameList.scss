@@ -1,0 +1,7 @@
+@import "colors";
+@import "sizes";
+
+.namelist {
+    position: absolute;
+    left: 50%; top: $s-header-height; right: 0; bottom: 0;
+}

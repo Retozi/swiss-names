@@ -1,3 +1,3 @@
 "use strict";
 
-module.exports = require('./make-webpack-config')('prod');
+module.exports = require('./makeWebpackConfig')('prod');

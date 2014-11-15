@@ -2,7 +2,7 @@
 var webpack = require('webpack');
 
 function getEntry(type) {
-    var entry = ['./src/main.js'];
+    var entry = ['./src/main.jsx'];
     //if dev then prepend dev server for autoreload
     if (type === 'dev') {
         entry.unshift('webpack/hot/dev-server');

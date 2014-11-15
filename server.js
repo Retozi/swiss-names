@@ -1,7 +1,7 @@
 "use strict";
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
-var config = require('./make-webpack-config')('dev');
+var config = require('./makeWebpackConfig')('dev');
 
 var express = require('express');
 var proxy = require('proxy-middleware');

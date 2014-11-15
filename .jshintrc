@@ -14,6 +14,6 @@
     "browser": true,
     "node": true,
     "maxdepth": 3,
-    "strict": true,
+    "strict": false,
     "esnext": true
 }

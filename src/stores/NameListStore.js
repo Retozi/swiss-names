@@ -1,5 +1,6 @@
 var mcFly = require('../flux/mcFly');
 
+var assign = require('lodash-node/modern/objects/assign');
 var MALE = require('json!../../assets/aggregate-M.json');
 var FEMALE = require('json!../../assets/aggregate-F.json');
 var ALL_LANGS = ['de', 'it', 'fr', 'ro'];
@@ -23,17 +24,18 @@ function rankData(data) {
 
 
 function makeData(langs, gender) {
-    var data = (gender === 'MALE') ? MALE : FEMALE;
+    // make a copy to be sure!
+    var data = assign({}, (gender === 'MALE') ? MALE : FEMALE);
     var res = [];
     for (var name in data) {
         if (data.hasOwnProperty(name)) {
             var item = {name: name, 'old': 0, 'mid': 0, 'new': 0};
             for (var i = 0; i < langs.length; i++) {
-                var l = langs[i];
-                item.old += data[name][l].old;
-                item.mid += data[name][l].mid;
-                item['new'] += data[name][l]['new'];
-                item.totalCount = data[name][l].old + data[name][l].mid + data[name][l]['new'];
+                var dataPoint = data[name][langs[i]];
+                item.old += dataPoint.old;
+                item.mid += dataPoint.mid;
+                item['new'] += dataPoint['new'];
+                item.totalCount = item.old + item.mid + item['new'];
             }
             res.push(item);
         }
@@ -48,13 +50,29 @@ var _state = {
     list: makeData(ALL_LANGS, 'MALE')
 };
 
+function update(updates) {
+    assign(_state, updates);
+    _state.list = makeData(_state.langs, _state.gender);
+}
+
+
 var NameListStore = mcFly.createStore({
-    getState() {
-        return _state;
+    getList() {
+        return _state.list;
+    },
+    getFilterState() {
+        return {
+            gender: _state.gender,
+            list: _state.list
+        };
     }
 }, function(payload) {
     switch(payload.actionType) {
-        case 'COUNT_ONE':
+        case 'SWITCH_GENDER':
+            update({gender: (_state.gender === 'MALE') ? 'FEMALE' : 'MALE'});
+            break;
+        case 'SET_LANGUAGES':
+            update({langs: payload.langs});
             break;
         default:
             return true;

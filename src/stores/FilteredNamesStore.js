@@ -1,8 +1,14 @@
 var mcFly = require('../flux/mcFly');
 var NamesListStore = require('./NameListStore');
+var assign = require('lodash-node/modern/objects/assign');
+
+
+function updateList() {
+  assign(_state, {data: NamesListStore.getList().slice(0, 100)});
+}
 
 var _state = {
-    data: NamesListStore.getState().list
+    data: NamesListStore.getList().slice(0, 100)
 };
 
 var FilteredNamesStore = mcFly.createStore({
@@ -11,7 +17,9 @@ var FilteredNamesStore = mcFly.createStore({
     }
 }, function(payload) {
     switch(payload.actionType) {
-        case 'COUNT_ONE':
+        case 'SWITCH_GENDER':
+            mcFly.dispatcher.waitFor([NamesListStore.getDispatchToken()]);
+            updateList();
             break;
         default:
             return true;

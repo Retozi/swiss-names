@@ -7,15 +7,25 @@ function getState() {
 }
 
 var NameList = React.createClass({
+    mixins: [FilteredNamesStore.mixin],
     getInitialState() {
         return getState();
     },
     onChange() {
         this.setState(getState());
     },
+    renderNames() {
+        return this.state.data.map((item) => {
+            return <li key={item.name}>{`${item.name} (${item.totalCount})`}</li>;
+        });
+    },
     render() {
         return (
-            <div className="namelist"/>
+            <div className="namelist">
+                <ul>
+                    {this.renderNames()}
+                </ul>
+            </div>
         );
     }
 });

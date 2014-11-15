@@ -1,6 +1,6 @@
 "use strict";
 
-require('normalize.css/normalize.css');
+require('./scss/reset.css');
 require('./scss/global.scss');
 
 

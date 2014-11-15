@@ -35,8 +35,8 @@ function makeData(langs, gender) {
                 item.old += dataPoint.old;
                 item.mid += dataPoint.mid;
                 item['new'] += dataPoint['new'];
-                item.totalCount = item.old + item.mid + item['new'];
             }
+            item.totalCount = item.old + item.mid + item['new'];
             res.push(item);
         }
     }
@@ -63,7 +63,7 @@ var NameListStore = mcFly.createStore({
     getFilterState() {
         return {
             gender: _state.gender,
-            list: _state.list
+            langs: _state.langs
         };
     }
 }, function(payload) {

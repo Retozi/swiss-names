@@ -21,6 +21,10 @@ var FilteredNamesStore = mcFly.createStore({
             mcFly.dispatcher.waitFor([NamesListStore.getDispatchToken()]);
             updateList();
             break;
+        case 'SET_LANGUAGES':
+            mcFly.dispatcher.waitFor([NamesListStore.getDispatchToken()]);
+            updateList();
+            break;
         default:
             return true;
       }

@@ -166,12 +166,12 @@ function namesCountBatchQuery(names, gender) {
 
 // download full data for all names in batches
 function downloadData(names, gender, callback) {
-    async.series(chunk(names, 500).map(function(batch, i) {
+    async.series(chunk(names, 100).map(function(batch, i) {
         return function(cb) {
-            console.log(i);
             get().query(namesCountBatchQuery(batch, gender))
-                .end(function(res) {
-                    cb(null, res.body.result);
+                .end(function(err, res) {
+                    console.log("gender batch " + i);
+                    cb(err, res.body.result);
                 });
         };
     }), function(err, results) {

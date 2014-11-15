@@ -16,13 +16,15 @@ var FilteredNamesStore = mcFly.createStore({
         return _state;
     }
 }, function(payload) {
+    mcFly.dispatcher.waitFor([NamesListStore.getDispatchToken()]);
     switch(payload.actionType) {
+        case 'SET_AGGREGATE_DATA':
+            updateList();
+            break;
         case 'SWITCH_GENDER':
-            mcFly.dispatcher.waitFor([NamesListStore.getDispatchToken()]);
             updateList();
             break;
         case 'SET_LANGUAGES':
-            mcFly.dispatcher.waitFor([NamesListStore.getDispatchToken()]);
             updateList();
             break;
         default:

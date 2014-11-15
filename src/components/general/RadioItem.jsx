@@ -9,7 +9,7 @@ var RadioItem = React.createClass({
     render() {
         return (
             <li
-             onClick={(!this.props.active) ? this.props.activate : undefined}
+             onClick={this.props.onClick}
              className="radio-button-item">
                 {this.renderRadio()}
                 <span>{this.props.annotation}</span>

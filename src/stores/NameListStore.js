@@ -1,10 +1,10 @@
 var mcFly = require('../flux/mcFly');
 
 var assign = require('lodash-node/modern/objects/assign');
-var MALE = require('json!../../assets/aggregate-M.json');
-var FEMALE = require('json!../../assets/aggregate-F.json');
 var ALL_LANGS = ['de', 'it', 'fr', 'ro'];
 
+var MALE = {};
+var FEMALE = {};
 
 function makeSortFun(attr) {
     return function(a, b) {
@@ -46,8 +46,8 @@ function makeData(langs, gender) {
 
 var _state = {
     gender: 'MALE',
-    langs: ['de', 'it', 'fr', 'ro'],
-    list: makeData(ALL_LANGS, 'MALE')
+    langs: ALL_LANGS,
+    list: []
 };
 
 function update(updates) {
@@ -68,6 +68,11 @@ var NameListStore = mcFly.createStore({
     }
 }, function(payload) {
     switch(payload.actionType) {
+        case 'SET_AGGREGATE_DATA':
+            MALE = payload.data.male;
+            FEMALE = payload.data.female;
+            update();
+            break;
         case 'SWITCH_GENDER':
             update({gender: (_state.gender === 'MALE') ? 'FEMALE' : 'MALE'});
             break;
@@ -76,9 +81,9 @@ var NameListStore = mcFly.createStore({
             break;
         default:
             return true;
-      }
-      NameListStore.emitChange();
-      return true;
+    }
+    NameListStore.emitChange();
+    return true;
 
 });
 

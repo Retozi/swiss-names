@@ -1,0 +1,18 @@
+.slider {
+    position: relative;
+    height: 45px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.slider-bar {
+    position: relative;
+    height: 100%;
+    background: green;
+}
+
+.slider-bar-active {
+    position: absolute;
+    top: 0; bottom: 0;
+    background: black;
+}

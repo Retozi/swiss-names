@@ -82,9 +82,9 @@ var Slider = React.createClass({
     },
     setSliderState(updates) {
         if (updates.start !== undefined) {
-            this.props.onSlide({start: updates.start});
+            this.props.onSlide('start', updates.start);
         } else if (updates.end !== undefined) {
-            this.props.onSlide({end: updates.end});
+            this.props.onSlide('end', updates.end);
         }
         this.setState(updates);
     },

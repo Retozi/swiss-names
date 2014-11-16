@@ -15,16 +15,16 @@ var NameList = React.createClass({
         this.setState(getState());
     },
     renderNames() {
-        return this.state.data.map((item) => {
-            return <li key={item.name}>{`${item.name} (${item.totalCount})`}</li>;
+        return this.state.list.slice(0, 50).map((item) => {
+            return <div key={item.name}>{`${item.name} (${item.totalCount})`}</div>;
         });
     },
     render() {
         return (
             <div className="namelist">
-                <ul>
+                <div className="names-container" style={{height: 16 * this.state.list.length}}>
                     {this.renderNames()}
-                </ul>
+                </div>
             </div>
         );
     }

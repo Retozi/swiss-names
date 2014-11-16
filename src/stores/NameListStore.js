@@ -13,7 +13,7 @@ function makeSortFun(attr) {
 }
 
 function rankData(data) {
-    ['old', 'mid', 'new'].forEach((attr) => {
+    ['oldRank', 'midRank', 'newRank'].forEach((attr) => {
         data.sort(makeSortFun(attr));
         data.forEach((item, i) => {
             item[attr] = i;
@@ -29,14 +29,14 @@ function makeData(langs, gender) {
     var res = [];
     for (var name in data) {
         if (data.hasOwnProperty(name)) {
-            var item = {name: name, 'old': 0, 'mid': 0, 'new': 0};
+            var item = {name: name, 'oldRank': 0, 'midRank': 0, 'newRank': 0};
             for (var i = 0; i < langs.length; i++) {
                 var dataPoint = data[name][langs[i]];
-                item.old += dataPoint.old;
-                item.mid += dataPoint.mid;
-                item['new'] += dataPoint['new'];
+                item.oldRank += dataPoint.old;
+                item.midRank += dataPoint.mid;
+                item.newRank += dataPoint['new'];
             }
-            item.totalCount = item.old + item.mid + item['new'];
+            item.totalCount = item.newRank + item.midRank + item.newRank;
             res.push(item);
         }
     }

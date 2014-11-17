@@ -37,7 +37,7 @@ var NameList = React.createClass({
             return (
                 <div
                  className="namelist-item"
-                 key={item.name}
+                 key={i}
                  style={{top: (range[0] + i) * ELEMENT_HEIGHT}}>
                     {`${item.name} (${item.totalCount})`}
                 </div>

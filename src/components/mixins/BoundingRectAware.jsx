@@ -2,8 +2,11 @@
 
 var shallowEqual = require('react/lib/shallowEqual');
 
-// keep width and height of an element. You must make a "boundingRectTarget" ref
-// to the element you would like to track
+/**
+* Keep boundingClientRect as state in  a component.
+* You must make a "boundingRectTarget" ref
+* to the element you would like to track
+*/
 module.exports = {
     getInitialState() {
         return {rect: {
@@ -36,6 +39,7 @@ module.exports = {
     componentWillReceiveProps() {
         this.updateDimensions();
     },
+    // throttle updateDemensions with requestAnimationFrame for efficiency
     updateDimensions() {
         if (!this.refs.boundingRectTarget) {
             console.warn("Warning: Component is missing boundingRectTarget ref");

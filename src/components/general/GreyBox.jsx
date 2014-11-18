@@ -1,4 +1,4 @@
-
+require('./GreyBox.scss');
 var React = require('react');
 
 var GreyBox = React.createClass({

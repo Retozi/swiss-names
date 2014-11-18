@@ -1,3 +1,6 @@
+@import "colors";
+@import "sizes";
+
 *, *:before, *:after {
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -5,4 +8,5 @@
 
 html, body {
     height: 100%;
+    color: $c-wet-asphalt-blue;
 }

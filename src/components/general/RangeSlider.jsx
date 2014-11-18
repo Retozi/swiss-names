@@ -1,7 +1,9 @@
 require('./RangeSlider.scss');
 var React = require('react');
-var PureRenderMixin = require('react/addons').PureRenderMixin;
 
+/**
+* get percentage left relative to first child (i.e. the slider)
+*/
 function relativeMousePos(e) {
     var mouseX = e.clientX || e.touches[0].clientX;
     var rect = e.currentTarget.childNodes[0].getBoundingClientRect();
@@ -10,7 +12,6 @@ function relativeMousePos(e) {
 }
 
 var Slider = React.createClass({
-    mixins: [PureRenderMixin],
     getInitialState() {
         return {
             start: 0,
@@ -39,6 +40,7 @@ var Slider = React.createClass({
             return {end: Math.min(Math.max(pos, s.start), 1)};
         }
     },
+    // drag is throtteled via rAF
     drag(e) {
         if (this.state.dragging && !this.state.skipDrag) {
             var newState = this.posState(e);

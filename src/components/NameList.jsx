@@ -24,10 +24,8 @@ var NameList = React.createClass({
     getVisibleRange() {
         if (this.state.list.length) {
             var start = Math.max((Math.round(this.state.scrollTop  / ELEMENT_HEIGHT) - 5), 0);
-            var end = Math.min(
-                start + Math.round(this.height() / ELEMENT_HEIGHT) + 10,
-                this.state.list.length - 1
-            );
+            var naiveEnd = start + Math.round(this.height() / ELEMENT_HEIGHT) + 10;
+            var end = Math.min(naiveEnd, this.state.list.length - 1);
             return [start, end];
         }
         return [0, 0];

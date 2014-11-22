@@ -1,9 +1,7 @@
 require('./RangeSlider.scss');
 var React = require('react');
 
-/**
-* get percentage left relative to first child (i.e. the slider)
-*/
+// get percentage left relative to first child (i.e. the slider)
 function relativeMousePos(e) {
     var mouseX = e.clientX || e.touches[0].clientX;
     var rect = e.currentTarget.childNodes[0].getBoundingClientRect();
@@ -30,14 +28,13 @@ var Slider = React.createClass({
     },
     posState(e) {
         e.preventDefault();
-        var s = this.state;
         var pos = relativeMousePos(e);
         var type = this.closerElement(pos);
         if (type === 'start') {
-            return {start: Math.min(Math.max(pos, 0), s.end)};
+            return {start: Math.min(Math.max(pos, 0), this.state.end)};
         }
         if (type === 'end') {
-            return {end: Math.min(Math.max(pos, s.start), 1)};
+            return {end: Math.min(Math.max(pos, this.state.start), 1)};
         }
     },
     // drag is throtteled via rAF
@@ -82,6 +79,7 @@ var Slider = React.createClass({
             width: (this.state.end - this.state.start) * 100 + '%'
         };
     },
+    //call onSlide prop Function then setState
     setSliderState(updates) {
         if (updates.start !== undefined) {
             this.props.onSlide('start', updates.start);
@@ -93,8 +91,12 @@ var Slider = React.createClass({
     render() {
         return (
         <div className='slider' {...this.mouseEvents()}>
-            <div className="slider-bar">
-                <div className="slider-bar-active" style={this.barStyles()}/>
+            <div>{this.props.startValue}</div>
+            <div className="slider-bar" data-dragging={this.state.dragging}>
+                <div className="slider-bar-active" style={this.barStyles()}>
+                    <div className="slider-bar-active-start"/>
+                    <div className="slider-bar-active-end"/>
+                </div>
             </div>
         </div>
         );

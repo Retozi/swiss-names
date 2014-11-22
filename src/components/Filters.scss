@@ -4,4 +4,5 @@
 .filters {
     position: absolute;
     left: 0; top: $s-header-height; right: 50%; bottom: 0;
+    overflow: hidden;
 }

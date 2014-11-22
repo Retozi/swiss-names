@@ -10,25 +10,28 @@ function updateFullList() {
 
 var _state = {
     fullList: [],
-    'newRank': [null, null],
     list: []
+};
+
+var _filterState = {
+    'newRank': [null, null]
 };
 
 function updateRankFilter(period, boundary, percentValue) {
     var index = (boundary === 'start') ? 0 : 1;
-    var rank = _state[period].slice();
+    var rank = _filterState[period].slice();
     rank[index] = (1 - percentValue) * (_state.fullList.length - 1);
-    _state[period] = rank;
+    _filterState[period] = rank;
 }
 
 
 function rankFilterFun(attr) {
     return function(item) {
         var passes = true;
-        if (_state[attr][0] !== null && item[attr] > _state[attr][0]) {
+        if (_filterState[attr][0] !== null && item[attr] > _filterState[attr][0]) {
             passes = false;
         }
-        if (_state[attr][1] !== null && item[attr] < _state[attr][1]) {
+        if (_filterState[attr][1] !== null && item[attr] < _filterState[attr][1]) {
             passes = false;
         }
         return passes;
@@ -49,6 +52,9 @@ function calculateFilteredList() {
 var FilteredNamesStore = mcFly.createStore({
     getState() {
         return _state;
+    },
+    getFilterState() {
+        return _filterState;
     }
 }, function(payload) {
     mcFly.dispatcher.waitFor([NamesListStore.getDispatchToken()]);

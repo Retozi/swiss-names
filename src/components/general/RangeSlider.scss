@@ -1,3 +1,5 @@
+@import "colors";
+
 .slider {
     position: relative;
     height: 45px;
@@ -7,12 +9,46 @@
 
 .slider-bar {
     position: relative;
-    height: 100%;
-    background: green;
+    height: 12px;
+    border-radius: 32px;
+    background: $c-concrete-grey;
+    cursor: pointer;
 }
 
 .slider-bar-active {
     position: absolute;
     top: 0; bottom: 0;
+    background: $c-turquoise-green;
+}
+
+%slider-bar-active-button {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
     background: black;
+    top: -3px;
+    background: $c-sea-green;
+    cursor: pointer;
+    &:hover {
+        background: $c-light-turquoise-green;
+    }
+}
+
+.slider-bar-active-start {
+    @extend %slider-bar-active-button;
+    left: -9px;
+}
+
+.slider-bar[data-dragging="start"] .slider-bar-active-start {
+        background: $c-light-turquoise-green;
+}
+
+.slider-bar-active-end {
+    @extend %slider-bar-active-button;
+    right: -9px;
+}
+
+.slider-bar[data-dragging="end"] .slider-bar-active-end {
+        background: $c-light-turquoise-green;
 }

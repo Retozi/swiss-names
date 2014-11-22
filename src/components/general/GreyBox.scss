@@ -3,6 +3,12 @@
 
 
 .grey-box {
+    position: relative;
     background: $c-clouds-grey;
     margin: 10px;
+    padding: 20px;
+    min-width: 400px;
+    border-radius: 5px;
+    float: right;
+    clear: right;
 }

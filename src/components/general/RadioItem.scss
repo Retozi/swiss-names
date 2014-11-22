@@ -1,0 +1,12 @@
+.radio-button-item {
+    &[data-active="false"] {
+        cursor: pointer;
+    }
+    &[data-active="true"] {
+        cursor: default;
+    }
+}
+
+.radio-button-item-text {
+    padding-left: 3px;
+}

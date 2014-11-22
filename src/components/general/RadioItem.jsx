@@ -1,3 +1,4 @@
+require('./RadioItem.scss');
 var React = require('react');
 
 
@@ -10,9 +11,10 @@ var RadioItem = React.createClass({
         return (
             <li
              onClick={this.props.onClick}
+             data-active={this.props.active}
              className="radio-button-item">
                 {this.renderRadio()}
-                <span>{this.props.annotation}</span>
+                <span className="radio-button-item-text">{this.props.annotation}</span>
             </li>
         );
     }

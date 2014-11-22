@@ -10,28 +10,28 @@ function updateFullList() {
 
 var _state = {
     fullList: [],
-    list: []
+    list: [],
+    'newRank': [null, null],
+    'midRank': [null, null],
+    'oldRank': [null, null]
 };
 
-var _filterState = {
-    'newRank': [null, null]
-};
 
 function updateRankFilter(period, boundary, percentValue) {
     var index = (boundary === 'start') ? 0 : 1;
-    var rank = _filterState[period].slice();
-    rank[index] = (1 - percentValue) * (_state.fullList.length - 1);
-    _filterState[period] = rank;
+    var rank = _state[period].slice();
+    rank[index] = Math.round((1 - Math.sqrt(percentValue)) * (_state.fullList.length - 1));
+    _state[period] = rank;
 }
 
 
 function rankFilterFun(attr) {
     return function(item) {
         var passes = true;
-        if (_filterState[attr][0] !== null && item[attr] > _filterState[attr][0]) {
+        if (_state[attr][0] !== null && item[attr] > _state[attr][0]) {
             passes = false;
         }
-        if (_filterState[attr][1] !== null && item[attr] < _filterState[attr][1]) {
+        if (_state[attr][1] !== null && item[attr] < _state[attr][1]) {
             passes = false;
         }
         return passes;
@@ -42,9 +42,16 @@ function rankFilterFun(attr) {
 function calculateFilteredList() {
     var list = [];
     _state.fullList.forEach((item) => {
-        if (rankFilterFun('newRank')(item)) {
-            list.push(item);
+        if (!rankFilterFun('newRank')(item)) {
+            return;
         }
+        if (!rankFilterFun('midRank')(item)) {
+            return;
+        }
+        if (!rankFilterFun('oldRank')(item)) {
+            return;
+        }
+        list.push(item);
     });
     _state.list = list;
 }
@@ -52,9 +59,6 @@ function calculateFilteredList() {
 var FilteredNamesStore = mcFly.createStore({
     getState() {
         return _state;
-    },
-    getFilterState() {
-        return _filterState;
     }
 }, function(payload) {
     mcFly.dispatcher.waitFor([NamesListStore.getDispatchToken()]);

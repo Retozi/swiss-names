@@ -3,12 +3,13 @@ var assign = require('lodash-node/modern/objects/assign');
 var React = require('react');
 var FilteredNamesStore = require('../stores/FilteredNamesStore');
 var BoundingRectAware = require('./mixins/BoundingRectAware');
+var SectionHeader = require('./general/SectionHeader');
 
 function getState() {
     return FilteredNamesStore.getState();
 }
 
-var ELEMENT_HEIGHT = 16;
+var ELEMENT_HEIGHT = 26;
 
 var NameList = React.createClass({
     mixins: [FilteredNamesStore.mixin, BoundingRectAware],
@@ -38,7 +39,7 @@ var NameList = React.createClass({
                  className="namelist-item"
                  key={i}
                  style={{top: (range[0] + i) * ELEMENT_HEIGHT}}>
-                    {`${item.name} (${item.totalCount})`}
+                    {item.name}
                 </div>
             );
         });
@@ -46,6 +47,9 @@ var NameList = React.createClass({
     render() {
         return (
             <div className="namelist" onScroll={this.setScrollTop} ref="boundingRectTarget">
+                <SectionHeader align="left">
+                    Names
+                </SectionHeader>
                 <div
                  className="names-container"
                  style={{height: ELEMENT_HEIGHT * this.state.list.length}}>

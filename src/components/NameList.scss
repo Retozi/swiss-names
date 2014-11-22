@@ -4,9 +4,16 @@
 .namelist {
     position: absolute;
     left: 50%; top: $s-header-height; right: 0; bottom: 0;
+    padding-left: 70px;
     overflow: scroll;
+    border-left: 1px solid $c-clouds-grey;
 }
 
 .namelist-item {
     position: absolute;
+    font-size: 18px;
+}
+
+.names-container {
+    position: relative;
 }

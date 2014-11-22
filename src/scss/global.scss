@@ -9,4 +9,10 @@
 html, body {
     height: 100%;
     color: $c-wet-asphalt-blue;
+    font-family: 'Lato', sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
 }

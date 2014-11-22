@@ -91,13 +91,14 @@ var Slider = React.createClass({
     render() {
         return (
         <div className='slider' {...this.mouseEvents()}>
-            <div>{this.props.startValue}</div>
             <div className="slider-bar" data-dragging={this.state.dragging}>
                 <div className="slider-bar-active" style={this.barStyles()}>
                     <div className="slider-bar-active-start"/>
                     <div className="slider-bar-active-end"/>
                 </div>
             </div>
+            <div className="slider-start-value">{this.props.startValue}</div>
+            <div className="slider-end-value">{this.props.endValue}</div>
         </div>
         );
     }

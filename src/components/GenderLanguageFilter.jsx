@@ -1,5 +1,5 @@
 var React = require('react');
-var GreyBox = require('./general/GreyBox');
+var Block = require('./general/Block');
 var RadioItem = require('./general/RadioItem');
 var CheckboxItem = require('./general/CheckboxItem');
 var Filter = require('./general/Filter');
@@ -57,7 +57,7 @@ var GenderLanguageFilter = React.createClass({
     },
     render() {
         return (
-            <GreyBox>
+            <Block>
                 <Filter caption="Gender">
                     <ul>
                         <RadioItem
@@ -77,7 +77,7 @@ var GenderLanguageFilter = React.createClass({
                         {this.renderLanguageRegions()}
                     </ul>
                 </Filter>
-            </GreyBox>
+            </Block>
         );
     }
 });

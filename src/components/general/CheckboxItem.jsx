@@ -11,7 +11,8 @@ var CheckboxItem = React.createClass({
         return (
             <li
              onClick={this.props.onClick}
-             className="checkbox-item">
+             className="checkbox-item"
+             data-checked={this.props.checked}>
                 {this.renderRadio()}
                 <span className="checkbox-item-text">{this.props.annotation}</span>
             </li>

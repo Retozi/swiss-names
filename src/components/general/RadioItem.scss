@@ -1,4 +1,8 @@
+@import "colors";
+
 .radio-button-item {
+    float: right;
+    margin-left: 15px;
     &[data-active="false"] {
         cursor: pointer;
     }

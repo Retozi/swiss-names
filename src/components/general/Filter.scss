@@ -1,14 +1,12 @@
 .filter-element {
-    position: relative;
-    width: 30%;
-    float: right;
-    clear: both;
+    margin-bottom: 60px;
 }
 
 .filter-caption {
-    position: relative;
-    width: 70%;
-    float: right;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: right;
 }
 
 .filter {

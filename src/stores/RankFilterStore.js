@@ -1,11 +1,11 @@
 var mcFly = require('../flux/mcFly');
 var assign = require('lodash-node/modern/objects/assign');
-var NameListStore = require('./NameListStore');
+var NamesStore = require('./NamesStore');
 
 function clearedRankFilter() {
     return {
         'percentRange': [0, 1],
-        'rankRange': [NameListStore.getList().length, 0]
+        'rankRange': [NamesStore.getList().length, 0]
     };
 }
 
@@ -32,7 +32,7 @@ function copyPeriod(period) {
 }
 
 function rankFromPercentage(percentValue) {
-    return Math.round((1 - Math.sqrt(percentValue)) * (NameListStore.getList().length));
+    return Math.round((1 - Math.sqrt(percentValue)) * (NamesStore.getList().length));
 }
 
 function updateRankFilter(period, boundary, percentValue) {
@@ -81,6 +81,9 @@ var RankFilterStore = mcFly.createStore({
         return true;
     }
 }, function(payload) {
+    mcFly.dispatcher.waitFor([
+        NamesStore.getDispatchToken(),
+    ]);
     switch(payload.actionType) {
         case 'SET_AGGREGATE_DATA':
             resetFilter();

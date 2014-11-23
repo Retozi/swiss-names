@@ -81,7 +81,7 @@ var Slider = React.createClass({
                     <div className="slider-bar-active-end"/>
                 </div>
             </div>
-            <div className="slider-start-value">{this.props.startValue}</div>
+            <div className="slider-start-value">{this.props.startValue} min</div>
             <div className="slider-end-value">{this.props.endValue}</div>
         </div>
         );

@@ -3,7 +3,7 @@ var Block = require('./general/Block');
 var RadioItem = require('./general/RadioItem');
 var CheckboxItem = require('./general/CheckboxItem');
 var Filter = require('./general/Filter');
-var NameListStore = require('../stores/NameListStore');
+var NamesStore = require('../stores/NamesStore');
 var FilterActions = require('../actions/FilterActions');
 
 var LANGUAGES = {
@@ -14,11 +14,11 @@ var LANGUAGES = {
 };
 
 function getFilterState() {
-    return NameListStore.getFilterState();
+    return NamesStore.getFilterState();
 }
 
 var GenderLanguageFilter = React.createClass({
-    mixins: [NameListStore.mixin],
+    mixins: [NamesStore.mixin],
     getInitialState() {
         return getFilterState();
     },

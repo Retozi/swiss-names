@@ -1,5 +1,5 @@
 var mcFly = require('../flux/mcFly');
-var NamesListStore = require('./NameListStore');
+var NamesStore = require('./NamesStore');
 var RankFilterStore = require('./RankFilterStore');
 var assign = require('lodash-node/modern/objects/assign');
 
@@ -9,7 +9,7 @@ var _state = {
 };
 
 function updateFullList() {
-  var list = NamesListStore.getList();
+  var list = NamesStore.getList();
   assign(_state, {fullList: list, length: list.length});
 }
 
@@ -32,7 +32,7 @@ var FilteredNamesStore = mcFly.createStore({
 }, function(payload) {
     // wait for every store to update, then calculate filter
     mcFly.dispatcher.waitFor([
-        NamesListStore.getDispatchToken(),
+        NamesStore.getDispatchToken(),
         RankFilterStore.getDispatchToken()
     ]);
     switch(payload.actionType) {

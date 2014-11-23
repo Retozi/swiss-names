@@ -5,7 +5,9 @@
     "lodash-node": "~2.4.1",
     "raf": "~2.0.4",
     "react": "0.12",
-    "mcfly": "0.0.6"
+    "mcfly": "0.0.6",
+    "hypher": "0.2.2",
+    "hyphenation.de": "latest"
   },
   "devDependencies": {
     "express": "4.10.2",

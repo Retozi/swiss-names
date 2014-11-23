@@ -8,7 +8,7 @@ var RankFilterStore = require('../stores/RankFilterStore');
 var RANGES = {
     newRank: '2000 - 2014',
     midRank: '1980 - 1999',
-    oldRank: '1925 - 1980'
+    oldRank: '1925 - 1979'
 };
 
 var PeriodRankFilter = React.createClass({

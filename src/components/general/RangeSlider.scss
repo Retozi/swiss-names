@@ -6,13 +6,14 @@ $s-bar-height: 12px;
 .slider {
     position: relative;
     height: $s-slider-height;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 80px;
+    padding-right: 80px;
+    margin-bottom: -10px;
 }
 
 .slider-bar {
     position: relative;
-    top: ($s-slider-height - $s-bar-height) / 2;
+    top: ($s-slider-height - $s-bar-height) / 2 - 8px;
     height: $s-bar-height;
     border-radius: 32px;
     background: $c-concrete-grey;
@@ -59,7 +60,8 @@ $s-bar-height: 12px;
 
 %slider-value {
     position: absolute;
-    line-height: $s-slider-height;
+    line-height: $s-slider-height - 18px;
+    width: 66px;
     top: 0;
     bottom: 0;
 }
@@ -67,9 +69,20 @@ $s-bar-height: 12px;
 .slider-start-value {
     @extend %slider-value;
     left: 0;
+    text-align: left;
 }
+
 
 .slider-end-value {
     @extend %slider-value;
     right: 0;
+    text-align: right;
+}
+
+.slider-start-value-caption {
+    float: right;
+}
+
+.slider-end-value-caption {
+    float: left;
 }

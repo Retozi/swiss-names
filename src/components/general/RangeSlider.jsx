@@ -81,8 +81,14 @@ var Slider = React.createClass({
                     <div className="slider-bar-active-end"/>
                 </div>
             </div>
-            <div className="slider-start-value">{this.props.startValue} min</div>
-            <div className="slider-end-value">{this.props.endValue}</div>
+            <div className="slider-start-value">
+                {this.props.startValue}
+                <span className="slider-start-value-caption">min</span>
+            </div>
+            <div className="slider-end-value">
+                <span className="slider-end-value-caption">max</span>
+                {this.props.endValue}
+            </div>
         </div>
         );
     }

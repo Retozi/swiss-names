@@ -1,54 +1,23 @@
 var mcFly = require('../flux/mcFly');
 var NamesListStore = require('./NameListStore');
+var RankFilterStore = require('./RankFilterStore');
 var assign = require('lodash-node/modern/objects/assign');
 
+var _state = {
+    fullList: [],
+    list: [],
+};
 
 function updateFullList() {
   var list = NamesListStore.getList();
   assign(_state, {fullList: list, length: list.length});
 }
 
-var _state = {
-    fullList: [],
-    list: [],
-    'newRank': [null, null],
-    'midRank': [null, null],
-    'oldRank': [null, null]
-};
-
-
-function updateRankFilter(period, boundary, percentValue) {
-    var index = (boundary === 'start') ? 0 : 1;
-    var rank = _state[period].slice();
-    rank[index] = Math.round((1 - Math.sqrt(percentValue)) * (_state.fullList.length - 1));
-    _state[period] = rank;
-}
-
-
-function rankFilterFun(attr) {
-    return function(item) {
-        var passes = true;
-        if (_state[attr][0] !== null && item[attr] > _state[attr][0]) {
-            passes = false;
-        }
-        if (_state[attr][1] !== null && item[attr] < _state[attr][1]) {
-            passes = false;
-        }
-        return passes;
-    };
-}
-
 
 function calculateFilteredList() {
     var list = [];
     _state.fullList.forEach((item) => {
-        if (!rankFilterFun('newRank')(item)) {
-            return;
-        }
-        if (!rankFilterFun('midRank')(item)) {
-            return;
-        }
-        if (!rankFilterFun('oldRank')(item)) {
+        if (!RankFilterStore.itemPassesFilter(item)) {
             return;
         }
         list.push(item);
@@ -61,7 +30,11 @@ var FilteredNamesStore = mcFly.createStore({
         return _state;
     }
 }, function(payload) {
-    mcFly.dispatcher.waitFor([NamesListStore.getDispatchToken()]);
+    // wait for every store to update, then calculate filter
+    mcFly.dispatcher.waitFor([
+        NamesListStore.getDispatchToken(),
+        RankFilterStore.getDispatchToken()
+    ]);
     switch(payload.actionType) {
         case 'SET_AGGREGATE_DATA':
             updateFullList();
@@ -73,7 +46,6 @@ var FilteredNamesStore = mcFly.createStore({
             updateFullList();
             break;
         case 'SET_RANK_FILTER':
-            updateRankFilter(payload.period, payload.boundary, payload.percentValue);
             break;
         default:
             return true;

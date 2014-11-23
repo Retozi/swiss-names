@@ -2,26 +2,20 @@ var React = require('react');
 var Block = require('./general/Block');
 var RangeSlider = require('./general/RangeSlider');
 var FilterActions = require('../actions/FilterActions');
-var FilteredNamesStore = require('../stores/FilteredNamesStore');
-
+var RankFilterStore = require('../stores/RankFilterStore');
 
 var PeriodRankFilter = React.createClass({
     onNewSlide(boundary, value) {
         FilterActions.setRankFilter(this.props.period, boundary, value);
     },
-    getStartValue() {
-        var value = this.props[this.props.period][0];
-        return (value === null) ? this.props.fullList.length : value + 1;
-    },
-    getEndValue() {
-        var value = this.props[this.props.period][1];
-        return (value === null) ? 1 : value + 1;
-    },
     render() {
+        var p = this.props[this.props.period];
         return (
             <RangeSlider
-             startValue={this.getStartValue()}
-             endValue={this.getEndValue()}
+             start={p.percentRange[0]}
+             end={p.percentRange[1]}
+             startValue={p.rankRange[0] + 1}
+             endValue={p.rankRange[1] + 1}
              onSlide={this.onNewSlide}/>
         );
     }
@@ -30,12 +24,12 @@ var PeriodRankFilter = React.createClass({
 
 
 var RankFilter = React.createClass({
-    mixins: [FilteredNamesStore.mixin],
+    mixins: [RankFilterStore.mixin],
     getInitialState() {
-        return FilteredNamesStore.getState();
+        return RankFilterStore.getState();
     },
     onChange() {
-        this.setState(FilteredNamesStore.getState());
+        this.setState(RankFilterStore.getState());
     },
     render() {
         return (

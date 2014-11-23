@@ -12,8 +12,6 @@ function relativeMousePos(e) {
 var Slider = React.createClass({
     getInitialState() {
         return {
-            start: 0,
-            end: 1,
             dragging: null,
             skipDrag: false,
         };
@@ -24,42 +22,37 @@ var Slider = React.createClass({
         };
     },
     closerElement(pos) {
-        return (Math.abs(this.state.start - pos) < Math.abs(this.state.end - pos)) ? 'start' : 'end';
+        return (Math.abs(this.props.start - pos) < Math.abs(this.props.end - pos)) ? 'start' : 'end';
     },
     posState(e) {
         e.preventDefault();
         var pos = relativeMousePos(e);
         var type = this.closerElement(pos);
         if (type === 'start') {
-            return {start: Math.min(Math.max(pos, 0), this.state.end)};
+            return [type, Math.min(Math.max(pos, 0), this.props.end)];
         }
         if (type === 'end') {
-            return {end: Math.min(Math.max(pos, this.state.start), 1)};
+            return [type, Math.min(Math.max(pos, this.props.start), 1)];
         }
     },
     // drag is throtteled via rAF
     drag(e) {
         if (this.state.dragging && !this.state.skipDrag) {
-            var newState = this.posState(e);
-            newState.skipDrag = true;
-            this.setSliderState(newState);
+            var posState = this.posState(e);
+            this.props.onSlide(posState[0], posState[1]);
             window.requestAnimationFrame(() => this.setState({skipDrag: false}));
         }
     },
     startDragging(e) {
-        var newState = this.posState(e);
-        if ('start' in newState) {
-            newState.dragging = 'start';
-        } else {
-            newState.dragging = 'end';
-        }
-        this.setSliderState(newState);
+        var posState = this.posState(e);
+        this.setState({dragging: posState[0]});
+        this.props.onSlide(posState[0], posState[1]);
     },
     stopDragging(e) {
         if (this.state.dragging) {
-            var newState = this.posState(e);
-            newState.dragging = null;
-            this.setSliderState(newState);
+            var posState = this.posState(e);
+            this.setState({dragging: null});
+            this.props.onSlide(posState[0], posState[1]);
         }
     },
     mouseEvents() {
@@ -75,18 +68,9 @@ var Slider = React.createClass({
     },
     barStyles() {
         return {
-            left: this.state.start * 100 + '%',
-            width: (this.state.end - this.state.start) * 100 + '%'
+            left: this.props.start * 100 + '%',
+            width: (this.props.end - this.props.start) * 100 + '%'
         };
-    },
-    //call onSlide prop Function then setState
-    setSliderState(updates) {
-        if (updates.start !== undefined) {
-            this.props.onSlide('start', updates.start);
-        } else if (updates.end !== undefined) {
-            this.props.onSlide('end', updates.end);
-        }
-        this.setState(updates);
     },
     render() {
         return (

@@ -33,27 +33,29 @@ var NameList = React.createClass({
     },
     renderNames() {
         var range = this.getVisibleRange();
-        return this.state.list.slice(range[0], range[1]).map((item, i) => {
-            return (
-                <div
-                 className="namelist-item"
-                 key={i}
-                 style={{top: (range[0] + i) * ELEMENT_HEIGHT}}>
-                    {item.name}
-                </div>
-            );
+        var names = this.state.list.slice(range[0], range[1]).map((item, i) => {
+            return <div className="name-item" key={i}>{item.name}</div>;
         });
+
+        return <div className="names-visible" style={{top: range[0] * ELEMENT_HEIGHT}}>
+            {names}
+        </div>;
     },
     render() {
         return (
-            <div className="namelist" onScroll={this.setScrollTop} ref="boundingRectTarget">
+            <div className="namelist">
                 <SectionHeader align="left">
                     Names
                 </SectionHeader>
                 <div
                  className="names-container"
-                 style={{height: ELEMENT_HEIGHT * this.state.list.length}}>
-                    {this.renderNames()}
+                 onScroll={this.setScrollTop}
+                 ref="boundingRectTarget">
+                    <div
+                     className="names"
+                     style={{height: ELEMENT_HEIGHT * this.state.list.length}}>
+                        {this.renderNames()}
+                    </div>
                 </div>
             </div>
         );

@@ -4,16 +4,30 @@
 .namelist {
     position: absolute;
     left: 50%; top: $s-header-height; right: 0; bottom: 0;
-    padding-left: 70px;
-    overflow: scroll;
+    padding-left: $s-section-padding;
     border-left: 1px solid $c-clouds-grey;
+    overflow: hidden;
+    &:after {
+        content: " ";
+        display: block;
+        width: 25rem;
+        position: absolute;
+        border-bottom: 1px solid $c-clouds-grey;
+        top: $s-header-height * 0.95; left: $s-section-padding;
+    }
 }
 
-.namelist-item {
-    position: absolute;
-    font-size: 18px;
+.name-item {
+    font-size: 1.125rem;
+    height: 26px; // must be equal to ELEMENT_HEIGHT in NameList.jsx
+}
+
+.names-visible {
+    position: relative;
 }
 
 .names-container {
-    position: relative;
+    overflow: scroll;
+    position: absolute;
+    top: $s-header-height; bottom: 0; right: 0; left: $s-section-padding;
 }

@@ -1,6 +1,8 @@
+@import "sizes";
+
 .section-header {
-    font-size: 30px;
-    margin-bottom: 45px;
+    font-size: 1.875rem;
+    height: $s-header-height;
     &[data-align="left"] {
         text-align: left;
     }

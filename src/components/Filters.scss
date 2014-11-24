@@ -1,9 +1,8 @@
-@import "colors";
 @import "sizes";
 
 .filters {
     position: absolute;
     left: 0; top: $s-header-height; right: 50%; bottom: 0;
     overflow: hidden;
-    padding-right: 70px;
+    padding-right: $s-section-padding;
 }

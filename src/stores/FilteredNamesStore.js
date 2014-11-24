@@ -16,15 +16,12 @@ function updateFullList() {
 
 function calculateFilteredList() {
     var list = [];
-    var max = 0;
     _state.fullList.forEach((item) => {
         if (!RankFilterStore.itemPassesFilter(item)) {
             return;
         }
-        max = Math.max(max, item.syll);
         list.push(item);
     });
-    console.log(max);
     _state.list = list;
 }
 

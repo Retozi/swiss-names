@@ -3,6 +3,7 @@ var React = require('react');
 var GenderLanguageFilter = require('./GenderLanguageFilter');
 var RankFilter = require('./RankFilter');
 var SectionHeader = require('./general/SectionHeader');
+var TextFilter = require('./TextFilter');
 
 var Filters = React.createClass({
     render() {
@@ -13,6 +14,7 @@ var Filters = React.createClass({
                 </SectionHeader>
                 <GenderLanguageFilter/>
                 <RankFilter/>
+                <TextFilter/>
             </div>
         );
     }

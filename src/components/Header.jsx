@@ -7,7 +7,6 @@ var Header = React.createClass({
     render() {
         return (
             <div className="header">
-                <h1>{"Swiss Names"}</h1>
             </div>
         );
     }

@@ -1,3 +1,4 @@
+require('./CheckboxItem.scss');
 var React = require('react');
 
 
@@ -10,9 +11,10 @@ var CheckboxItem = React.createClass({
         return (
             <li
              onClick={this.props.onClick}
-             className="checkbox-item">
+             className="checkbox-item"
+             data-checked={this.props.checked}>
                 {this.renderRadio()}
-                <span>{this.props.annotation}</span>
+                <span className="checkbox-item-text">{this.props.annotation}</span>
             </li>
         );
     }

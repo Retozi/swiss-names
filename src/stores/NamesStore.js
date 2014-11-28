@@ -1,4 +1,6 @@
 var mcFly = require('../flux/mcFly');
+var Hypher = require('hypher');
+var gerHyph = require('hyphenation.de');
 
 var assign = require('lodash-node/modern/objects/assign');
 var ALL_LANGS = ['de', 'it', 'fr', 'ro'];
@@ -26,17 +28,20 @@ function rankData(data) {
 function makeData(langs, gender) {
     // make a copy to be sure!
     var data = assign({}, (gender === 'MALE') ? MALE : FEMALE);
+    var hypher = new Hypher(gerHyph);
     var res = [];
     for (var name in data) {
         if (data.hasOwnProperty(name)) {
             var item = {name: name, 'oldRank': 0, 'midRank': 0, 'newRank': 0};
             for (var i = 0; i < langs.length; i++) {
                 var dataPoint = data[name][langs[i]];
+                // its not yet a "rank" but a count, will become one after rankData
                 item.oldRank += dataPoint.old;
                 item.midRank += dataPoint.mid;
                 item.newRank += dataPoint['new'];
             }
             item.totalCount = item.newRank + item.midRank + item.newRank;
+            item.syllCount = hypher.hyphenate(name).length;
             res.push(item);
         }
     }

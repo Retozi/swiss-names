@@ -1,0 +1,16 @@
+@import "colors";
+
+.radio-button-item {
+    float: right;
+    margin-left: 15px;
+    &[data-active="false"] {
+        cursor: pointer;
+    }
+    &[data-active="true"] {
+        cursor: default;
+    }
+}
+
+.radio-button-item-text {
+    padding-left: 3px;
+}

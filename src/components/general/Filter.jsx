@@ -1,3 +1,4 @@
+require('./Filter.scss');
 var React = require('react');
 
 var Filter = React.createClass({
@@ -5,7 +6,7 @@ var Filter = React.createClass({
         return (
             <div className="filter">
                 <div className="filter-caption">
-                    {this.props.caption}
+                    <h3>{this.props.caption}</h3>
                 </div>
                 <div className="filter-element">
                     {this.props.children}

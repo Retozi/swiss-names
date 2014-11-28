@@ -1,18 +1,88 @@
+@import "colors";
+
+$s-slider-height: 44px;
+$s-bar-height: 12px;
+
 .slider {
     position: relative;
-    height: 45px;
-    padding-left: 50px;
-    padding-right: 50px;
+    height: $s-slider-height;
+    padding-left: 80px;
+    padding-right: 80px;
+    margin-bottom: -10px;
 }
 
 .slider-bar {
     position: relative;
-    height: 100%;
-    background: green;
+    top: ($s-slider-height - $s-bar-height) / 2 - 8px;
+    height: $s-bar-height;
+    border-radius: 32px;
+    background: $c-concrete-grey;
+    cursor: pointer;
 }
 
 .slider-bar-active {
     position: absolute;
     top: 0; bottom: 0;
+    background: $c-turquoise-green;
+}
+
+%slider-bar-active-button {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
     background: black;
+    top: -3px;
+    background: $c-sea-green;
+    cursor: pointer;
+    &:hover {
+        background: $c-light-turquoise-green;
+    }
+}
+
+.slider-bar-active-start {
+    @extend %slider-bar-active-button;
+    left: -9px;
+}
+
+.slider-bar[data-dragging="start"] .slider-bar-active-start {
+        background: $c-light-turquoise-green;
+}
+
+.slider-bar-active-end {
+    @extend %slider-bar-active-button;
+    right: -9px;
+}
+
+.slider-bar[data-dragging="end"] .slider-bar-active-end {
+        background: $c-light-turquoise-green;
+}
+
+%slider-value {
+    position: absolute;
+    line-height: $s-slider-height - 18px;
+    width: 66px;
+    top: 0;
+    bottom: 0;
+}
+
+.slider-start-value {
+    @extend %slider-value;
+    left: 0;
+    text-align: left;
+}
+
+
+.slider-end-value {
+    @extend %slider-value;
+    right: 0;
+    text-align: right;
+}
+
+.slider-start-value-caption {
+    float: right;
+}
+
+.slider-end-value-caption {
+    float: left;
 }

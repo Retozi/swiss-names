@@ -16,3 +16,6 @@ http://localhost:8080
     webpack
 
 
+### Design
+
+The Design of the App is heavily inspired by [Flat UI](http://designmodo.github.io/Flat-UI/)

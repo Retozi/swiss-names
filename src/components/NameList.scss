@@ -28,7 +28,7 @@
 }
 
 .names-container {
-    overflow: scroll;
+    overflow-y: scroll;
     position: absolute;
     top: $s-header-height; bottom: 0; right: 0; left: $s-section-padding;
 }

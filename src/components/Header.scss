@@ -6,12 +6,12 @@
     position: relative;
     width: 100%;
     height: $s-header-height;
-    padding: 0 20px;
-    h1 {
-        margin: 0;
-        line-height: $s-header-height;
-        font-size: 40px;
-        font-weight: normal;
+    padding: 10px 20px;
+    text-align: right;
+    a {
+        &:link, &:visited {
+            color: $c-wet-asphalt-blue;
+        }
     }
 }
 

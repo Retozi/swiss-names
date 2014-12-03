@@ -2,6 +2,33 @@ var React = require('react');
 var Block = require('./general/Block');
 var Filter = require('./general/Filter');
 var TextFilterStore = require('../stores/TextFilterStore');
+var CheckboxItem = require('./general/CheckboxItem');
+var FilterActions = require('../actions/FilterActions');
+
+
+var SyllablesCount = React.createClass({
+    renderSyllablesCounts() {
+        return ['1', '2', '3', '>3'].reverse().map((i) => {
+            return (
+                <CheckboxItem
+                 key={i}
+                 onClick={() => FilterActions.toggleSyllablesCount(i)}
+                 checked={this.props.syllables[i]}
+                 annotation={i}/>
+            );
+        });
+    },
+    render() {
+        return (
+            <Filter caption="Syllables Count">
+                <ul>
+                    {this.renderSyllablesCounts()}
+                </ul>
+            </Filter>
+        );
+    }
+});
+
 
 
 var OtherFilter = React.createClass({
@@ -15,10 +42,7 @@ var OtherFilter = React.createClass({
     render() {
         return (
             <Block>
-                <Filter caption="Syllables Count">
-                </Filter>
-                <Filter caption="Text Patterns">
-                </Filter>
+                <SyllablesCount syllables={this.state.syllables}/>
             </Block>
         );
     }

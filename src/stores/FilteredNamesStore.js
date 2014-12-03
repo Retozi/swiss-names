@@ -1,6 +1,7 @@
 var mcFly = require('../flux/mcFly');
 var NamesStore = require('./NamesStore');
 var RankFilterStore = require('./RankFilterStore');
+var TextFilterStore = require('./TextFilterStore');
 var assign = require('lodash-node/modern/objects/assign');
 
 var _state = {
@@ -20,6 +21,9 @@ function calculateFilteredList() {
         if (!RankFilterStore.itemPassesFilter(item)) {
             return;
         }
+        if (!TextFilterStore.itemPassesFilter(item)) {
+            return;
+        }
         list.push(item);
     });
     _state.list = list;
@@ -33,7 +37,8 @@ var FilteredNamesStore = mcFly.createStore({
     // wait for every store to update, then calculate filter
     mcFly.dispatcher.waitFor([
         NamesStore.getDispatchToken(),
-        RankFilterStore.getDispatchToken()
+        RankFilterStore.getDispatchToken(),
+        TextFilterStore.getDispatchToken()
     ]);
     switch(payload.actionType) {
         case 'SET_AGGREGATE_DATA':
@@ -46,6 +51,8 @@ var FilteredNamesStore = mcFly.createStore({
             updateFullList();
             break;
         case 'SET_RANK_FILTER':
+            break;
+        case 'TOGGLE_SYLLABLES_COUNT':
             break;
         default:
             return true;

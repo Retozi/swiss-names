@@ -19,6 +19,12 @@ var FilterActions = mcFly.createActions({
             boundary: boundary,
             percentValue: percentValue
         };
+    },
+    toggleSyllablesCount(number) {
+        return {
+            actionType: 'TOGGLE_SYLLABLES_COUNT',
+            number: number
+        };
     }
 });
 

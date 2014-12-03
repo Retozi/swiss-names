@@ -1,6 +1,7 @@
 @import "colors";
 @import "sizes";
 
+
 .namelist {
     position: absolute;
     left: 50%; top: $s-header-height; right: 0; bottom: 0;
@@ -30,4 +31,12 @@
     overflow: scroll;
     position: absolute;
     top: $s-header-height; bottom: 0; right: 0; left: $s-section-padding;
+}
+
+.namelist-filter-status {
+    transform: translateY(-115%);
+    text-align: right;
+    position: absolute;
+    top: $s-header-height;
+    width: 25rem;
 }

@@ -47,6 +47,9 @@ var NameList = React.createClass({
                 <SectionHeader align="left">
                     Names
                 </SectionHeader>
+                <div className="namelist-filter-status">
+                    {`${this.state.list.length} / ${this.state.fullList.length} Names`}
+                </div>
                 <div
                  className="names-container"
                  onScroll={this.setScrollTop}

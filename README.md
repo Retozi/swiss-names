@@ -8,7 +8,7 @@ A React/Flux app to filter swiss forenames.
     npm install
     node server.js
 
-[](http://localhost:8080)
+[http://localhost:8080](http://localhost:8080)
 
 ### Production Build
 

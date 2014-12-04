@@ -7,12 +7,19 @@ var express = require('express');
 var proxy = require('proxy-middleware');
 var url = require('url');
 
+/**
+* this is a proxy to the wepack dev server. It is not needed
+* in this project but is an example on how to provide correct routing
+* for the dev server
+* see http://stackoverflow.com/questions/26203725/how-to-allow-for-webpack-dev-server-to-allow-entry-points-from-react-router/26218192#26218192
+*/
 var app = express();
 app.use('/assets', proxy(url.parse('http://localhost:8081/assets')));
 
 app.get('/*', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
+
 
 var server = new WebpackDevServer(webpack(config), {
     // webpack-dev-server options
